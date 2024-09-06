@@ -1,4 +1,4 @@
-package ven
+package ven_service
 
 type cesiumWidgetOption struct {
 	fullscreenButton     bool // 全屏按钮
