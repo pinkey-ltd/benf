@@ -1,0 +1,239 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: UserService API
+    version: 0.0.1
+paths:
+    /password:
+        put:
+            tags:
+                - UserService
+            operationId: UserService_SetUserPassword
+            parameters:
+                - name: password
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SetUserPasswordResponse'
+    /password/{id}:
+        put:
+            tags:
+                - UserService
+            operationId: UserService_ResetUserPassword
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: password
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ResetUserPasswordResponse'
+    /users:
+        get:
+            tags:
+                - UserService
+            operationId: UserService_GetUserList
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetUserListResponse'
+        post:
+            tags:
+                - UserService
+            operationId: UserService_CreateUser
+            parameters:
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: showName
+                  in: query
+                  schema:
+                    type: string
+                - name: email
+                  in: query
+                  schema:
+                    type: string
+                - name: status
+                  in: query
+                  schema:
+                    type: string
+                - name: password
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateUserResponse'
+    /users/{id}:
+        get:
+            tags:
+                - UserService
+            operationId: UserService_GetUser
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetUserResponse'
+        put:
+            tags:
+                - UserService
+            operationId: UserService_UpdateUser
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: showName
+                  in: query
+                  schema:
+                    type: string
+                - name: email
+                  in: query
+                  schema:
+                    type: string
+                - name: status
+                  in: query
+                  schema:
+                    type: string
+                - name: password
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateUserResponse'
+        delete:
+            tags:
+                - UserService
+            operationId: UserService_DeleteUser
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteUserResponse'
+components:
+    schemas:
+        CreateUserResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                showName:
+                    type: string
+                email:
+                    type: string
+                status:
+                    type: string
+        DeleteUserResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+                message:
+                    type: string
+        GetUserListResponse:
+            type: object
+            properties:
+                users:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GetUserRequest'
+        GetUserRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        GetUserResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                showName:
+                    type: string
+                email:
+                    type: string
+                status:
+                    type: string
+        ResetUserPasswordResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+                message:
+                    type: string
+        SetUserPasswordResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+                message:
+                    type: string
+        UpdateUserResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                showName:
+                    type: string
+                email:
+                    type: string
+                status:
+                    type: string
+tags:
+    - name: UserService

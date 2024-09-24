@@ -2,13 +2,47 @@ syntax = "proto3";
 
 package user;
 
-option go_package = ".";
+option go_package = "../pb";
 
+import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 
 service UserService {
-  rpc GetUSer(GetUserRequest) returns (GetUserResponse) {}
-  rpc GetUserList(google.protobuf.Empty) returns (GetUserListResponse) {}
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) ={
+      get:"/users/{id}"
+    };
+  }
+  rpc GetUserList(google.protobuf.Empty) returns (GetUserListResponse) {
+    option (google.api.http) ={
+      get:"/users"
+    };
+  }
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse){
+    option (google.api.http) ={
+      delete:"/users/{id}"
+    };
+  }
+  rpc ResetUserPassword(ResetUserPasswordRequest) returns (ResetUserPasswordResponse){
+    option (google.api.http) ={
+      put:"/password/{id}"
+    };
+  }
+  rpc SetUserPassword(SetUserPasswordRequest) returns (SetUserPasswordResponse){
+    option (google.api.http) ={
+      put:"/password"
+    };
+  }
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {
+    option (google.api.http) ={
+      post:"/users"
+    };
+  }
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {
+    option (google.api.http) ={
+      put:"/users/{id}"
+    };
+  }
 }
 
 message GetUserRequest {
@@ -21,9 +55,69 @@ message GetUserResponse {
   string show_name = 3;
   string email = 4;
   string status = 5;
-  string password = 6;
 }
 
 message GetUserListResponse {
   repeated GetUserRequest users = 1;
+}
+
+message DeleteUserRequest {
+  string id = 1;
+}
+
+message DeleteUserResponse {
+  string status = 1;
+  optional string message = 2;
+}
+
+message ResetUserPasswordRequest {
+  string id = 1;
+  optional string password = 2;
+}
+
+message ResetUserPasswordResponse {
+  string status = 1;
+  optional string message = 2;
+}
+
+message SetUserPasswordRequest {
+  string password = 1;
+}
+
+message SetUserPasswordResponse {
+  string status = 1;
+  optional string message = 2;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  string show_name = 2;
+  string email = 3;
+  string status = 4;
+  optional string password = 5;
+}
+
+message CreateUserResponse {
+  string id = 1;
+  string name = 2;
+  string show_name = 3;
+  string email = 4;
+  string status = 5;
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  string name = 2;
+  string show_name = 3;
+  string email = 4;
+  string status = 5;
+  optional string password = 6;
+}
+
+message  UpdateUserResponse {
+  string id = 1;
+  string name = 2;
+  string show_name = 3;
+  string email = 4;
+  string status = 5;
 }

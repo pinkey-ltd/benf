@@ -24,3 +24,7 @@ func (h *Handler) GetUserList(ctx context.Context, in *emptypb.Empty) (*pb.GetUs
 
 	return nil, nil
 }
+
+func (h *Handler) DeleteUser(ctx context.Context, in *pb.DeleteUserRequest) (*pb.DeleteUserResponse, error) {
+	return nil, nil
+}
